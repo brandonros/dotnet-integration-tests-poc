@@ -1,0 +1,21 @@
+# Ignore the bin and obj directories
+bin/
+obj/
+
+# Ignore all files with the .suo extension
+*.suo
+
+# Ignore all files with the .user extension
+*.user
+
+# Ignore all files in the .vs directory
+.vs/
+
+# Ignore the .git directory
+.git/
+
+# Ignore the .gitignore file
+.gitignore
+
+# Ignore the .dockerignore file
+.dockerignore
