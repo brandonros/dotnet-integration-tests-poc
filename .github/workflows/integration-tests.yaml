@@ -22,18 +22,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-buildx-
 
-    - name: Build and start services
-      run: docker-compose up --build -d
-
     - name: Build integration tests
       run: docker build -t ourservice-integration-tests .
       working-directory: ./IntegrationTests
+
+    - name: Build and start services
+      run: docker-compose up --build -d
 
     - name: Wait for services to be ready
       run: sleep 10
 
     - name: Run .NET tests in Docker context
-      run: docker run --rm --network mynetwork1 ourservice-integration-tests
+      run: docker run --rm --network network1 ourservice-integration-tests
 
     - name: Tear down services
       run: docker-compose down
