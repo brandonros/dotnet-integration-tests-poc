@@ -25,11 +25,14 @@ jobs:
     - name: Build and start services
       run: docker-compose up --build -d
 
+    - name: Build integration tests
+      run: docker build -f IntegrationTests/Dockerfile -t ourservice-integration-tests .
+
     - name: Wait for services to be ready
       run: sleep 10
 
-    - name: Run .NET tests
-      run: dotnet test
+    - name: Run .NET tests in Docker context
+      run: docker run --rm --network container:ourservice ourservice-integration-tests
 
     - name: Tear down services
       run: docker-compose down
