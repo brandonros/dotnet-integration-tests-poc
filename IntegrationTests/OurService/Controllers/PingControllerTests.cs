@@ -14,7 +14,7 @@ namespace Tests.OurService.Controllers
         {
             _client = new HttpClient
             {
-                BaseAddress = new System.Uri("http://ourservice:5000")
+                BaseAddress = new System.Uri("http://127.0.0.1:5000")
             };
         }
 
