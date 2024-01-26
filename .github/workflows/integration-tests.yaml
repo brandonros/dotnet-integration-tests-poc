@@ -33,7 +33,7 @@ jobs:
       run: sleep 10
 
     - name: Run .NET tests in Docker context
-      run: docker run --rm --network container:ourservice ourservice-integration-tests
+      run: docker run --rm --network mynetwork1 ourservice-integration-tests
 
     - name: Tear down services
       run: docker-compose down
