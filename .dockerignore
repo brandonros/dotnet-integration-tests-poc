@@ -19,3 +19,6 @@ obj/
 
 # Ignore the .dockerignore file
 .dockerignore
+
+# Ignore the Dockerfile file
+Dockerfile
