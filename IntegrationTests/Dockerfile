@@ -1,16 +1,20 @@
-# Use the official .NET SDK image to run tests
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 5000
+EXPOSE 5001
 
-# Set the working directory in the container
-WORKDIR /tests
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["IntegrationTests.csproj", "./"]
+RUN dotnet restore "IntegrationTests.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "IntegrationTests.csproj" -c Release -o /app/build
 
-# Copy the .csproj file(s) and restore any dependencies
-# Note: Adjust the path if your .csproj files are in a subdirectory
-COPY *.csproj ./
-RUN dotnet restore
+FROM build AS publish
+RUN dotnet publish "IntegrationTests.csproj" -c Release -o /app/publish
 
-# Copy the remaining test project files into the container
-COPY . ./
-
-# Define the entry point command to run tests
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "test"]
