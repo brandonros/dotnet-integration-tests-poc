@@ -2,6 +2,7 @@ version: '3.4'
 
 networks:
   network1:
+    name: network1
 
 services:
   ourservice:
