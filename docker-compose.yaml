@@ -6,6 +6,7 @@ networks:
 
 services:
   ourservice:
+    container_name: ourservice
     hostname: ourservice
     image: ourservice
     build:
