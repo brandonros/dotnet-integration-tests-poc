@@ -9,7 +9,7 @@ namespace OurService.Controllers
         [HttpGet]
         public IActionResult Ping()
         {
-            return Ok();
+            return StatusCode(500);
         }
     }
 }
