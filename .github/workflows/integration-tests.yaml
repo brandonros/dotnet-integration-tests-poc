@@ -35,6 +35,13 @@ jobs:
 
     - name: Wait for services to be ready
       run: sleep 10
+    
+    - name: Get container ID of ourservice
+      id: get-container
+      run: echo "::set-output name=container_id::$(docker-compose ps -q ourservice)"
+
+    - name: Print logs of ourservice
+      run: docker logs ${{ steps.get-container.outputs.container_id }}
 
     - name: Run .NET tests in Docker context
       run: docker run --rm --network network1 ourservice-integration-tests
