@@ -23,8 +23,7 @@ jobs:
           ${{ runner.os }}-buildx-
 
     - name: Build unit tests
-      run: docker build -t ourservice-unit-tests .
-      working-directory: ./UnitTests
+      run: docker build -f ./UnitTests/Dockerfile -t ourservice-unit-tests .
     
     - name: Run .NET tests
       run: docker run --rm ourservice-unit-tests
