@@ -14,8 +14,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5000:5000
-      - 5001:5001
     environment:
-      - ASPNETCORE_URLS=http://0.0.0.0:5001;https://0.0.0.0:5002
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
     networks:
       - network1
