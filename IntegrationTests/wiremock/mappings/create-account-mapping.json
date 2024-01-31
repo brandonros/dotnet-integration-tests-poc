@@ -1,19 +1,15 @@
 {
-    "request": {
-      "method": "POST",
-      "urlPath": "/accounts/create",
-      "headers": {
-        "Content-Type": {
-          "equalTo": "application/json"
-        }
-      }
+  "request": {
+    "method": "POST",
+    "urlPath": "/accounts/create"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "accountId": "1234"
     },
-    "response": {
-      "status": 200,
-      "jsonBody": { "accountId": "1234" },
-      "headers": {
-        "Content-Type": "application/json"
-      }
+    "headers": {
+      "Content-Type": "application/json"
     }
   }
-  
+}

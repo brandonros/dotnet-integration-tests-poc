@@ -29,8 +29,7 @@ jobs:
       run: docker build -f ./IntegrationTests/Dockerfile -t ourservice-integration-tests .
 
     - name: Build service
-      run: docker build -t ourservice .
-      working-directory: ./OurService
+      run: docker build -t ourservice ./OurService/
 
     - name: Start services
       run: docker-compose up -d
@@ -41,9 +40,13 @@ jobs:
     - name: Run .NET tests in Docker context
       run: docker run --rm --network network1 ourservice-integration-tests
 
-    - name: Print Docker logs
+    - name: Print Docker logs (WireMock)
       if: always()
       run: docker logs wiremock
+
+    - name: Print Docker logs (OurService)
+      if: always()
+      run: docker logs ourservice
 
     - name: Tear down services
       run: docker-compose down

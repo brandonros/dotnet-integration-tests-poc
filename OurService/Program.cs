@@ -12,6 +12,9 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllers();
 
+        // Add HTTP client.
+        builder.Services.AddHttpClient();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
