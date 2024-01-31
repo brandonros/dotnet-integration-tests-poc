@@ -5,6 +5,18 @@ networks:
     name: network1
 
 services:
+  wiremock:
+    container_name: wiremock
+    hostname: wiremock
+    image: wiremock/wiremock:3.3.1-1
+    command: "--port 8080 --print-all-network-traffic --verbose"
+    ports:
+      - 8080:8080
+    volumes:
+      - ./IntegrationTests/wiremock/mappings:/home/wiremock/mappings
+    networks:
+      - network1
+
   ourservice:
     container_name: ourservice
     hostname: ourservice
@@ -16,5 +28,9 @@ services:
       - 5000:5000
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:5000
+      - VENDOR_URL=http://wiremock:8080
     networks:
       - network1
+    depends_on:
+      - wiremock
+

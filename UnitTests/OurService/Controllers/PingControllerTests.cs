@@ -8,7 +8,7 @@ namespace OurService.Tests.Controllers
     public class PingControllerTests
     {
         [Test]
-        public void Ping_ShouldReturnOkResult()
+        public void ShouldReturnOkResult()
         {
             // Arrange
             var controller = new PingController();

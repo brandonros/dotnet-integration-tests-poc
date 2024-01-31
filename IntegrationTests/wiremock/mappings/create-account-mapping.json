@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPath": "/accounts/create"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "accountId": "1234"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
