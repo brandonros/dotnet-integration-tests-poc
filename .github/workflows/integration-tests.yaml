@@ -41,5 +41,8 @@ jobs:
     - name: Run .NET tests in Docker context
       run: docker run --rm --network network1 ourservice-integration-tests
 
+    - name: Print Docker logs
+      run: docker ps
+
     - name: Tear down services
       run: docker-compose down

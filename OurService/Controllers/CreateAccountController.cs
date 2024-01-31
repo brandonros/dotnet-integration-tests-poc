@@ -23,31 +23,52 @@ namespace OurService.Controllers
         [Route("create")]
         public async Task<IActionResult> CreateAccount([FromBody] OurCreateAccountRequest ourRequest)
         {
-            // translate our request to vendor request
-            var vendorRequest = new VendorCreateAccountRequest {
+            // Translate our request to vendor request
+            var vendorRequest = new VendorCreateAccountRequest
+            {
                 username = ourRequest.username,
                 email = ourRequest.email
             };
-            // serialize
-            var jsonContent = JsonSerializer.Serialize(vendorRequest);
-            var stringifiedRequestBody = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-            // send to vendor
-            var response = await _httpClient.PostAsync($"{_vendorUrl}/accounts/create", stringifiedRequestBody);
-            // check response status
-            if (response.StatusCode != HttpStatusCode.OK) {
+
+            // Serialize request body
+            var stringifiedRequestBody = JsonSerializer.Serialize(vendorRequest);
+            var content = new StringContent(stringifiedRequestBody, Encoding.UTF8, "application/json");
+
+            // Create HttpRequestMessage
+            var httpRequestMessage = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri($"{_vendorUrl}/accounts/create"),
+                Content = content
+            };
+
+            // Send to vendor
+            var response = await _httpClient.SendAsync(httpRequestMessage);
+
+            // Check response status
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
                 return StatusCode((int)response.StatusCode, "Invalid response code");
             }
-            // get response body
+
+            // Get response body
             var responseContent = await response.Content.ReadAsStringAsync();
-            // deserialize to VendorCreateAccountResponse
+
+            // Deserialize to VendorCreateAccountResponse
             var vendorCreateAccountResponse = JsonSerializer.Deserialize<VendorCreateAccountResponse>(responseContent);
-            if (vendorCreateAccountResponse == null) {
+            if (vendorCreateAccountResponse == null)
+            {
                 throw new Exception("Failed to deserialize response");
             }
-            var ourResponse = new OurCreateAccountResponse {
+
+            // Translate to OurCreateAccountResponse
+            var ourResponse = new OurCreateAccountResponse
+            {
                 accountId = vendorCreateAccountResponse.accountId
             };
+
             return Ok(ourResponse);
         }
+
     }
 }
