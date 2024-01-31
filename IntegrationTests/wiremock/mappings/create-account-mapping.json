@@ -10,7 +10,7 @@
     },
     "response": {
       "status": 200,
-      "body": "{\"accountId\":\"12345\"}",
+      "jsonBody": { "accountId": "1234" },
       "headers": {
         "Content-Type": "application/json"
       }
