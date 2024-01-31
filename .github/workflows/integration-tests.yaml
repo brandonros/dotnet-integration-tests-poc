@@ -36,7 +36,7 @@ jobs:
       run: docker-compose up -d
 
     - name: Wait for services to be ready
-      run: sleep 10
+      run: sleep 20
     
     - name: Run .NET tests in Docker context
       run: docker run --rm --network network1 ourservice-integration-tests
