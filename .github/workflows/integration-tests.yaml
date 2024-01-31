@@ -26,8 +26,7 @@ jobs:
           ${{ runner.os }}-buildx-
 
     - name: Build integration tests
-      run: docker build -t ourservice-integration-tests .
-      working-directory: ./IntegrationTests
+      run: docker build -f ./IntegrationTests/Dockerfile -t ourservice-integration-tests .
 
     - name: Build service
       run: docker build -t ourservice .
