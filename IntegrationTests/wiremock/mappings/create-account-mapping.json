@@ -1,0 +1,25 @@
+{
+    "request": {
+      "method": "POST",
+      "urlPath": "/accounts/create",
+      "headers": {
+        "Content-Type": {
+          "equalTo": "application/json"
+        }
+      },
+      "bodyPatterns": [
+        {
+          "matchesJsonPath": "$.username",
+          "matchesJsonPath": "$.email"
+        }
+      ]
+    },
+    "response": {
+      "status": 200,
+      "body": "{\"accountId\":\"12345\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
+  
